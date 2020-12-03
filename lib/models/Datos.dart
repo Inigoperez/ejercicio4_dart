@@ -3,6 +3,8 @@ import 'dart:convert';
 
 Usuarios usuariosFromJson(String str) => Usuarios.fromJson(json.decode(str));
 
+Result resultsFromJson(String str) => Result.fromJson(json.decode(str));
+
 String usuariosToJson(Usuarios data) => json.encode(data.toJson());
 
 class Usuarios {

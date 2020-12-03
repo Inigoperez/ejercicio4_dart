@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 String url = 'https://randomuser.me/api/?results=10';
 
-Future<Usuarios> getUsuarios() async{
-  final response = await http.get('$url');
-  return usuariosFromJson(response.body);
+Future<Result> getResult() async{
+  final response = await http.get('https://randomuser.me/api/?results=10');
+  return resultsFromJson(response.body);
 }

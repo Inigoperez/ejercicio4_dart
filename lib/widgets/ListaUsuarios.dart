@@ -1,13 +1,23 @@
 import 'package:ejercicio4_dart/models/Datos.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ejercicio4_dart/api/Api_controller.dart';
 
 
 Widget createListUsers() {
-  return FutureBuilder<Usuarios>(
-    future: getUsuarios(),
+  return FutureBuilder<Result>(
+    future: getResult(),
     builder: (context, snapshot) {
-        return Text('${snapshot.data.title}');
+      if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.data == null) {
+          return Text('no data');
+        }else {
+          return Text('${snapshot.data.name}');
+        }
+      }else if (snapshot.connectionState == ConnectionState.none) {
+        return Text('Error'); // error
+      }else {
+        return CircularProgressIndicator(); // loading
+      }
     }
 );
 }
