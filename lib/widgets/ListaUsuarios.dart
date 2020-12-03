@@ -4,14 +4,16 @@ import 'package:ejercicio4_dart/api/Api_controller.dart';
 
 
 Widget createListUsers() {
-  return FutureBuilder<Result>(
-    future: getResult(),
+  return FutureBuilder<Usuarios>(
+    future: getUsers(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         if (snapshot.data == null) {
-          return Text('no data');
+          print(snapshot.data);
+          return Text('no data');  
         }else {
-          return Text('${snapshot.data.name}');
+          print(snapshot.data.results);
+          return Text('${snapshot.data.results}');
         }
       }else if (snapshot.connectionState == ConnectionState.none) {
         return Text('Error'); // error
