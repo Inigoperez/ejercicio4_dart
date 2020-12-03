@@ -291,6 +291,18 @@ class Name {
         "first": first,
         "last": last,
     };
+
+    getFirst(){
+      return this.first;
+    }
+
+    gettitle(){
+      return this.title;
+    }
+
+    getlast(){
+      return this.last;
+    }
 }
 
 class Picture {
