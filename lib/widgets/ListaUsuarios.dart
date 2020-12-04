@@ -9,11 +9,26 @@ Widget createListUsers() {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         if (snapshot.data == null) {
-          print(snapshot.data);
           return Text('no data');  
         }else {
-          print(snapshot.data.results);
-          return Text('${snapshot.data.results}');
+          final List<Result> resultados = snapshot.data.results;
+          for(Result datos in snapshot.data.results){
+            return Card(
+              child: Row(
+                children: [
+                  //print(datos.name.title+" "+datos.name.first+" "+datos.name.last);
+                  Text(resultados.length.toString()),
+                  Image.network(datos.picture.thumbnail),
+                  Text(datos.name.title.toString()+" "+datos.name.first.toString()+" "+datos.name.last.toString()),
+                  Icon(Icons.favorite,
+                    color: Colors.pink,
+                    size: 30.0,
+                    semanticLabel: 'Text to announce in accessibility modes'
+                  ),
+                ],
+              ),
+            );
+          }
         }
       }else if (snapshot.connectionState == ConnectionState.none) {
         return Text('Error'); // error
