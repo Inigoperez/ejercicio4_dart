@@ -12,23 +12,46 @@ Widget createListUsers() {
           return Text('no data');  
         }else {
           final List<Result> resultados = snapshot.data.results;
-          for(Result datos in snapshot.data.results){
-            return Card(
+          for(int i = 0;i<resultados.length;i++){
+            return new Card(
               child: Row(
+                mainAxisAlignment : MainAxisAlignment.spaceAround,
                 children: [
-                  //print(datos.name.title+" "+datos.name.first+" "+datos.name.last);
                   Text(resultados.length.toString()),
-                  Image.network(datos.picture.thumbnail),
-                  Text(datos.name.title.toString()+" "+datos.name.first.toString()+" "+datos.name.last.toString()),
-                  Icon(Icons.favorite,
-                    color: Colors.pink,
-                    size: 30.0,
-                    semanticLabel: 'Text to announce in accessibility modes'
+                  Image.network(resultados[i].picture.medium),
+                  Center(
+                    child: Text(resultados[i].name.title.toString()+" "+resultados[i].name.first.toString()+" "+resultados[i].name.last.toString()),
                   ),
+                  Icon(Icons.favorite,
+                      color: Colors.pink,
+                      size: 30.0,
+                      semanticLabel: 'Favoritos'
+                  ),  
                 ],
               ),
             );
+            print(snapshot.data.results);
           }
+          /*for(Result datos in snapshot.data.results){
+            return new Card(
+              child: Row(
+                mainAxisAlignment : MainAxisAlignment.spaceAround,
+                children: [
+                  //print(datos.name.title+" "+datos.name.first+" "+datos.name.last);
+                  Text(resultados.length.toString()),
+                  Image.network(datos.picture.medium),
+                  Center(
+                    child: Text(datos.name.title.toString()+" "+datos.name.first.toString()+" "+datos.name.last.toString()),
+                  ),
+                  Icon(Icons.favorite,
+                      color: Colors.pink,
+                      size: 30.0,
+                      semanticLabel: 'Text to announce in accessibility modes'
+                  ),  
+                ],
+              ),
+            );
+          }*/
         }
       }else if (snapshot.connectionState == ConnectionState.none) {
         return Text('Error'); // error

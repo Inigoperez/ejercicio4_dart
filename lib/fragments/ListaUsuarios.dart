@@ -13,12 +13,11 @@ class ListaUsuarios extends StatelessWidget {
       ),
       drawer: NavigationDrawer(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            createListUsers(),
-          ],
-        ),
+        child: ListView(
+              children: [
+                createListUsers()
+              ],
+            ),
       ),
     );
   }
