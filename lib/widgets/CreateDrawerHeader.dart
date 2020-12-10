@@ -5,19 +5,21 @@ Widget createDrawerHeader() {
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
+        gradient: LinearGradient(
+          colors: [
             Colors.blue,
             Colors.orange,
-            Colors.green
+            Colors.green,
           ],
-              stops: [
+          stops: [
             0.3,
             0.5,
             0.8,
           ],
-              begin: FractionalOffset.topCenter,
-              end: FractionalOffset.bottomCenter)),
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+        ),
+      ),
       child: Stack(children: <Widget>[
         Positioned(
             bottom: 12.0,
