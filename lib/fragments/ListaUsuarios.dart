@@ -14,7 +14,7 @@ class ListaUsuarios extends StatelessWidget {
       drawer: NavigationDrawer(),
       body: Center(
         child: ListView(
-          children: [createListUsers()],
+          children: [ListaUsuarios()],
         ),
       ),
     );

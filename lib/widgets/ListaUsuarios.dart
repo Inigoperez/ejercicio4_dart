@@ -3,58 +3,70 @@ import 'package:flutter/material.dart';
 import 'package:ejercicio4_dart/api/Api_controller.dart';
 import 'dart:core';
 
-Widget createListUsers() {
-  return FutureBuilder<Usuarios>(
-      future: getUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data == null) {
-            return Column(
-              children: [
-                Center(
-                  child: Text('NO DATA'),
-                ),
-              ],
-            );
-          } else {
-            final List<Result> resultados = snapshot.data.results;
-            final List<Widget> listaDevolver = new List<Widget>();
-            for (int i = 0; i < resultados.length; i++) {
-              print(resultados[i].name.title);
-              listaDevolver.add(
-                new Card(
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(resultados.length.toString()),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(resultados[i].picture.medium),
-                      ),
-                      Center(
-                        child: Text(resultados[i].name.title.toString() +
-                            " " +
-                            resultados[i].name.first.toString() +
-                            " " +
-                            resultados[i].name.last.toString()),
-                      ),
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.grey,
-                        size: 30.0,
-                        semanticLabel: 'Favoritos',
-                      ),
-                    ],
+class ListaUsuarios extends StatelessWidget {
+  final listaDevolver = new List<Widget>();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        children: createListUsers());
+  }
+
+  Widget createListUsers() {
+    return FutureBuilder<Usuarios>(
+        future: getUsers(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == null) {
+              return Column(
+                children: [
+                  Center(
+                    child: Text('NO DATA'),
                   ),
-                ),
+                ],
               );
-              print(listaDevolver[i]);
-            }
-            return listaDevolver;
-            //return ListView(
-            //  children: <Widget>[listaDevolver],
-            //);
-            /*for(Result datos in snapshot.data.results){
+            } else {
+              final List<Result> resultados = snapshot.data.results;
+              for (int i = 0; i < resultados.length; i++) {
+                print(resultados[i].name.title);
+                listaDevolver.add(
+                  new Card(
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(resultados.length.toString()),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(resultados[i].picture.medium),
+                        ),
+                        Center(
+                          child: Text(resultados[i].name.title.toString() +
+                              " " +
+                              resultados[i].name.first.toString() +
+                              " " +
+                              resultados[i].name.last.toString()),
+                        ),
+                        Icon(
+                          Icons.favorite,
+                          color: Colors.grey,
+                          size: 30.0,
+                          semanticLabel: 'Favoritos',
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+                print(listaDevolver[i]);
+              }
+              for (Widget widget in listaDevolver) {
+                return widget;
+              }
+
+              //return ListView(
+              //  children: <Widget>[listaDevolver],
+              //);
+              /*for(Result datos in snapshot.data.results){
             return new Card(
               child: Row(
                 mainAxisAlignment : MainAxisAlignment.spaceAround,
@@ -74,23 +86,24 @@ Widget createListUsers() {
               ),
             );
           }*/
+            }
+          } else if (snapshot.connectionState == ConnectionState.none) {
+            return Column(
+              children: [
+                Center(
+                  child: Text('ERROR'),
+                ),
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                Center(
+                  child: CircularProgressIndicator(), //Loadin
+                ),
+              ],
+            );
           }
-        } else if (snapshot.connectionState == ConnectionState.none) {
-          return Column(
-            children: [
-              Center(
-                child: Text('ERROR'),
-              ),
-            ],
-          );
-        } else {
-          return Column(
-            children: [
-              Center(
-                child: CircularProgressIndicator(), //Loadin
-              ),
-            ],
-          );
-        }
-      });
+        });
+  }
 }
