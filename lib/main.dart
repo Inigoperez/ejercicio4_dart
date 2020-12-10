@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NavigationDrawer Demo',
+      title: 'Lista Usuarios',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
